@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
 import { Beer } from './beer';
 
 @Injectable({
@@ -8,7 +7,9 @@ import { Beer } from './beer';
 export class BeersService {
 
   private _beers: Beer[] = [
-    new Beer('Achel', 'Strong Blonde', 'Belgium', 7.0, ['fruity', 'hoppy'])
+    new Beer('Achel', 'Strong Blonde', 'Belgium', 7.0, "https://brewhouse.es/wp-content/uploads/2021/01/ACHE101.3.jpg" ,['fruity', 'hoppy']),
+    new Beer('Achel', 'Strong Blonde', 'Belgium', 7.0, "https://brewhouse.es/wp-content/uploads/2021/01/ACHE101.3.jpg" ,['fruity', 'hoppy']),
+    new Beer('Achel', 'Strong Blonde', 'Belgium', 7.0, "https://brewhouse.es/wp-content/uploads/2021/01/ACHE101.3.jpg" ,['fruity', 'hoppy']),
   ]
 
   constructor() { }
