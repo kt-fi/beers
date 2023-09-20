@@ -8,7 +8,7 @@ const routes: Routes = [
     component: MenuPage,
   },
   {
-    path: 'type/:type',
+    path: 'category/:category',
     loadChildren: ()=> import('../menu/menu-type/menu-type.module').then(m => m.MenuTypePageModule)
   }
 ];

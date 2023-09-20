@@ -2,7 +2,7 @@ export class Beer {
     constructor(
         public beerId: string,
         public name: string,
-        public type: string,
+        public category: string,
         public style: string,
         public country: string,
         public alcohol: number,

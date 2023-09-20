@@ -19,8 +19,8 @@ export class MenuTypePage implements OnInit {
     private route: ActivatedRoute ) { }
 
   ngOnInit() {
-    this.beerType = this.route.snapshot.params['type']
-    this.beersService.beers.pipe(map(beers => beers.filter(beer=> beer.type == this.route.snapshot.params['type'] )))
+    this.beerType = this.route.snapshot.params['category']
+    this.beersService.beers.pipe(map(beers => beers.filter(beer=> beer.category == this.route.snapshot.params['category'] )))
       .subscribe(beers => this.beers = beers)
 
   }
