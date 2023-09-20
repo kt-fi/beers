@@ -6,6 +6,10 @@ const routes: Routes = [
   {
     path: '',
     component: MenuPage,
+  },
+  {
+    path: 'type/:type',
+    loadChildren: ()=> import('../menu/menu-type/menu-type.module').then(m => m.MenuTypePageModule)
   }
 ];
 

@@ -1,14 +1,19 @@
-<ion-tabs>
 
-  <ion-tab-bar slot="bottom">
+<ion-content [fullscreen]="true" *ngIf="loading">
+    <app-app-loading></app-app-loading>
+</ion-content>
+
+<ion-tabs *ngIf="!loading" color="dark">
+
+  <ion-tab-bar slot="bottom" color="dark">
     <ion-tab-button tab="menu" href="/tabs/menu">
       <ion-icon aria-hidden="true" name="book"></ion-icon>
       <ion-label>Menu</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="search" href="/tabs/tab2">
+    <ion-tab-button tab="recommend" href="/tabs/recommend">
       <ion-icon aria-hidden="true" name="search"></ion-icon>
-      <ion-label>Search</ion-label>
+      <ion-label>Recommend</ion-label>
     </ion-tab-button>
   </ion-tab-bar>
 

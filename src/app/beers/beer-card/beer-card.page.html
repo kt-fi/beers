@@ -1,0 +1,37 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="warning">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/menu/type/{{selectedBeer.type}}"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{selectedBeer.name}}</ion-title>
+    <ion-img src="../../../assets/icon/gatos-logo.png" slot="primary" class="gatos-logo"></ion-img>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" color="warning">
+  <ion-grid>
+    <ion-row>
+      <ion-col size-sm="12">
+        <ion-card>
+          <div class="ion-text-center">
+            <img class="ion-padding  beer__card--image-size" [src]="selectedBeer.imageUrl" alt="{{selectedBeer.name}}">
+          </div>
+
+          <ion-card-header>
+            <ion-card-title>
+              {{selectedBeer.name}}
+            </ion-card-title>
+            <ion-card-subtitle>
+              <strong>Style: </strong>{{selectedBeer.style}} / <strong>Alc: </strong>{{selectedBeer.alcohol}}º
+            </ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+          <p><strong>About: </strong> {{selectedBeer.description}}</p>
+            <p><strong>Notes:</strong> {{selectedBeer.notes}}</p>
+          </ion-card-content>
+        </ion-card>
+          </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>
