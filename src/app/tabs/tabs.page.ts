@@ -14,7 +14,7 @@ export class TabsPage implements OnInit{
 ngOnInit(): void {
     setTimeout(()=>{
       this.loading = false;
-    },7000)
+    },1000)
 }
 
 }

@@ -22,7 +22,7 @@
           <ion-item>
             <ion-select label="Style" placeholder="Style">
               <ion-select-option value="any">Any</ion-select-option>
-              <ion-select-option value="Ale">Ale</ion-select-option>
+              <ion-select-option *ngFor="let style of styles" value="{{style}}">{{style}}</ion-select-option>
             </ion-select>
           </ion-item>
           <ion-item>
@@ -38,12 +38,12 @@
           <ion-item>
             <ion-select label="Country" placeholder="Country">
               <ion-select-option value="any">Any</ion-select-option>
-              <ion-select-option value="Germany">Germany</ion-select-option>
+              <ion-select-option *ngFor="let country of countries" value="{{country}}">{{country}}</ion-select-option>
             </ion-select>
           </ion-item>
           <ion-item>
-            <ion-select label="Flavour" placeholder="Style">
-              <ion-select-option value="malta">Malta</ion-select-option>
+            <ion-select label="Flavour" placeholder="Flavour">
+              <ion-select-option *ngFor="let flavour of flavours" value="{{flavour}}">{{flavour}}</ion-select-option>
             </ion-select>
           </ion-item>
 
