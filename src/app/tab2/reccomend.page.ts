@@ -14,7 +14,7 @@ export class ReccomendPage implements OnInit{
 
   randomBeer!: Beer;
   allBeers!: Beer[];
-  filteredBeers!: Beer[];
+  filteredBeers: Beer[] = [];
 
   filterItems: any = {
     styles: [],
@@ -22,9 +22,12 @@ export class ReccomendPage implements OnInit{
     flavours: []
   }
 
-  styles!: string[];
-  countries!: string[];
-  flavours!: string[];
+  slideConfig = {
+    effect: 'cards',
+    centeredSlides: true,
+    autoHeight: true
+  }
+
 
   constructor(private beerService: BeersService) {}
 
@@ -79,13 +82,17 @@ removeDuplicates(arr:any) {
   }
 
   submitForm(){
-    console.log(this.form.value)
     this.filteredBeers = this.runFilters(this.form.value)
     this.pickRandom()
   }
 
   clearForm() {
     this.form.reset()
+  }
+
+  resetChoices(){
+    this.clearForm()
+    this.filteredBeers = []
   }
 
   runFilters(values:any){
