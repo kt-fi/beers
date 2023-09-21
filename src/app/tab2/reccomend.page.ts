@@ -10,10 +10,17 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class ReccomendPage implements OnInit{
 
-  form?: FormGroup;
+  form!: FormGroup;
 
   randomBeer!: Beer;
   allBeers!: Beer[];
+  filteredBeers!: Beer[];
+
+  filterItems: any = {
+    styles: [],
+    countries: [],
+    flavours: []
+  }
 
   styles!: string[];
   countries!: string[];
@@ -26,57 +33,106 @@ export class ReccomendPage implements OnInit{
 
       // CREATE FORM
       this.form = new FormGroup({
-        style: new FormControl('null'),
-        alcohol: new FormControl('null'),
-        country: new FormControl('null'),
-        taste: new FormControl('null')
+        style: new FormControl(null),
+        alcohol: new FormControl(null),
+        country: new FormControl(null),
+        flavour: new FormControl(null)
       })
 
-      this.styles = this.getStyles();
-      this.countries = this.getCountries();
-      this.flavours = this.getFlavours()
+      this.getSelectorOptions()
   }
 
 
+// REFACTOR -------------------------------
 
-getStyles(){
-  let tempArray:string[] = []
-  this.allBeers.forEach(beer => {
-       tempArray.push(beer.style)
+getSelectorOptions(){
+  let allBeersCopy = [...this.allBeers]
+  let style:string[] = []
+  let country:string[]  =  []
+  let notes:string[] =[]
+
+  allBeersCopy.forEach(beer => {
+      style.push(beer.style)
+      country.push(beer.country)
   })
-  tempArray = this.removeDuplicates(tempArray)
-  return tempArray;
-}
-
-getCountries(){
-  let tempArray:string[] = []
-  this.allBeers.forEach(beer => {
-       tempArray.push(beer.country)
-  })
-  tempArray = this.removeDuplicates(tempArray)
-  return tempArray;
-}
-
-getFlavours(){
-  let tempArray: string[] = [];
-  this.allBeers.forEach(beer => {
+  allBeersCopy.forEach(beer => {
     beer.notes.forEach(note => {
-      tempArray.push(note)
+      notes.push(note)
     })
   })
-  tempArray = this.removeDuplicates(tempArray)
-  return tempArray
+
+  this.filterItems.styles = this.removeDuplicates(style)
+  this.filterItems.countries = this.removeDuplicates(country)
+  this.filterItems.flavours = this.removeDuplicates(notes)
 }
 
 
 removeDuplicates(arr:any) {
   return arr.filter((item:any, index:any) => arr.indexOf(item) === index);
 }
+// ----------------------------------------------
+
 
   pickRandom(){
-    let randomNumber = Math.floor(Math.random() * (this.allBeers.length))
-    this.randomBeer = this.allBeers[randomNumber]
+    let randomNumber = Math.floor(Math.random() * (this.filteredBeers.length))
+    this.randomBeer = this.filteredBeers[randomNumber]
   }
+
+  submitForm(){
+    console.log(this.form.value)
+    this.filteredBeers = this.runFilters(this.form.value)
+    this.pickRandom()
+  }
+
+  clearForm() {
+    this.form.reset()
+  }
+
+  runFilters(values:any){
+    let toFilter: any[] = [...this.allBeers]
+
+    toFilter = toFilter.filter(beer => {
+      if(values.style === 'any' || values.style === null){
+        return toFilter;
+      }
+      return beer.style === values.style;
+    })
+    toFilter = toFilter.filter(beer => {
+      if(values.country === 'any' || values.country === null){
+        return toFilter;
+      }
+      return beer.country === values.country;
+    })
+    toFilter = toFilter.filter(beer => {
+      if(values.flavour === 'any' || values.flavour === null){
+        return toFilter;
+      }
+    return beer.notes.find((notes:any) => notes === values.flavour)
+    })
+
+    toFilter = toFilter.filter(beer => {
+      if(values.alcohol === 'any' || values.alcohol === null){
+        return toFilter;
+      }
+
+    if(values.alcohol == '0'){
+      return beer.alcohol == 0;
+    }else if(values.alcohol == '1'){
+      return beer.alcohol >= 1 && beer.alcohol <= 5
+    }else if(values.alcohol == '2'){
+      return beer.alcohol >= 5 && beer.alcohol <= 7
+    }else if(values.alcohol == '3'){
+      return beer.alcohol >= 7 && beer.alcohol <= 9
+    }else if(values.alcohol == '4'){
+      return beer.alcohol >= 9
+    }else {
+      return;
+    }
+    })
+
+    return toFilter;
+  }
+
 
 
 

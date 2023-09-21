@@ -18,15 +18,15 @@
     </ion-row>
     <ion-row>
       <ion-col size-sm="12">
-        <form action="">
+        <form action="" [formGroup]="form">
           <ion-item>
-            <ion-select label="Style" placeholder="Style">
+            <ion-select formControlName="style" label="Style" placeholder="Style">
               <ion-select-option value="any">Any</ion-select-option>
-              <ion-select-option *ngFor="let style of styles" value="{{style}}">{{style}}</ion-select-option>
+              <ion-select-option *ngFor="let style of filterItems.styles" value="{{style}}">{{style}}</ion-select-option>
             </ion-select>
           </ion-item>
           <ion-item>
-            <ion-select label="Alcohol" placeholder="Alcohol">
+            <ion-select  formControlName="alcohol"  label="Alcohol" placeholder="Alcohol">
               <ion-select-option value="any">Any</ion-select-option>
               <ion-select-option value="0">0</ion-select-option>
               <ion-select-option value="1">1-5</ion-select-option>
@@ -36,24 +36,25 @@
             </ion-select>
           </ion-item>
           <ion-item>
-            <ion-select label="Country" placeholder="Country">
+            <ion-select  formControlName="country" label="Country" placeholder="Country">
               <ion-select-option value="any">Any</ion-select-option>
-              <ion-select-option *ngFor="let country of countries" value="{{country}}">{{country}}</ion-select-option>
+              <ion-select-option *ngFor="let country of filterItems.countries" value="{{country}}">{{country}}</ion-select-option>
             </ion-select>
           </ion-item>
           <ion-item>
-            <ion-select label="Flavour" placeholder="Flavour">
-              <ion-select-option *ngFor="let flavour of flavours" value="{{flavour}}">{{flavour}}</ion-select-option>
+            <ion-select  formControlName="flavour"  label="Flavour" placeholder="Flavour">
+              <ion-select-option value="any">Any</ion-select-option>
+              <ion-select-option *ngFor="let flavour of filterItems.flavours" value="{{flavour}}">{{flavour}}</ion-select-option>
             </ion-select>
           </ion-item>
 
         </form>
         <ion-row>
           <ion-col size-sm="6">
-            <ion-button expand="block" color="dark"  (click)="pickRandom()">Reccomend Me!</ion-button>
+            <ion-button expand="block" color="dark"  (click)="submitForm()">Reccomend Me!</ion-button>
           </ion-col>
           <ion-col size-sm="6">
-              <ion-button expand="block" fill="clear" color="dark">Clear Form</ion-button>
+              <ion-button expand="block" fill="clear" color="dark" (click)="clearForm()">Clear Form</ion-button>
           </ion-col>
 
         </ion-row>
