@@ -6,7 +6,12 @@ const routes: Routes = [
   {
     path: '',
     component: ReccomendPage,
+  },
+  {
+    path: 'recommend-card-deck',
+    loadChildren: () => import('./recommend-card-deck/recommend-card-deck.module').then( m => m.RecommendCardDeckPageModule)
   }
+
 ];
 
 @NgModule({

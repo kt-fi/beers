@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BeersService } from '../beers.service';
 import { Beer } from '../beer';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-reccomend',
@@ -22,14 +23,8 @@ export class ReccomendPage implements OnInit{
     flavours: []
   }
 
-  slideConfig = {
-    effect: 'cards',
-    centeredSlides: true,
-    autoHeight: true
-  }
 
-
-  constructor(private beerService: BeersService) {}
+  constructor(private beerService: BeersService, private route: Router) {}
 
   ngOnInit(): void {
       this.beerService.beers.subscribe(beers => this.allBeers = beers);
@@ -76,72 +71,74 @@ removeDuplicates(arr:any) {
 // ----------------------------------------------
 
 
-  pickRandom(){
-    let randomNumber = Math.floor(Math.random() * (this.filteredBeers.length))
-    this.randomBeer = this.filteredBeers[randomNumber]
-  }
 
-  submitForm(){
-    this.filteredBeers = this.runFilters(this.form.value)
-    this.pickRandom()
-  }
-
-  clearForm() {
-    this.form.reset()
-  }
 
   resetChoices(){
     this.clearForm()
     this.filteredBeers = []
   }
 
-  runFilters(values:any){
-    let toFilter: any[] = [...this.allBeers]
+  // runFilters(values:any){
+  //   let toFilter: any[] = [...this.allBeers]
 
-    toFilter = toFilter.filter(beer => {
-      if(values.style === 'any' || values.style === null){
-        return toFilter;
-      }
-      return beer.style === values.style;
-    })
-    toFilter = toFilter.filter(beer => {
-      if(values.country === 'any' || values.country === null){
-        return toFilter;
-      }
-      return beer.country === values.country;
-    })
-    toFilter = toFilter.filter(beer => {
-      if(values.flavour === 'any' || values.flavour === null){
-        return toFilter;
-      }
-    return beer.notes.find((notes:any) => notes === values.flavour)
-    })
+  //   toFilter = toFilter.filter(beer => {
+  //     if(values.style === 'any' || values.style === null){
+  //       return toFilter;
+  //     }
+  //     return beer.style === values.style;
+  //   })
+  //   toFilter = toFilter.filter(beer => {
+  //     if(values.country === 'any' || values.country === null){
+  //       return toFilter;
+  //     }
+  //     return beer.country === values.country;
+  //   })
+  //   toFilter = toFilter.filter(beer => {
+  //     if(values.flavour === 'any' || values.flavour === null){
+  //       return toFilter;
+  //     }
+  //   return beer.notes.find((notes:any) => notes === values.flavour)
+  //   })
 
-    toFilter = toFilter.filter(beer => {
-      if(values.alcohol === 'any' || values.alcohol === null){
-        return toFilter;
-      }
+  //   toFilter = toFilter.filter(beer => {
+  //     if(values.alcohol === 'any' || values.alcohol === null){
+  //       return toFilter;
+  //     }
 
-    if(values.alcohol == '0'){
-      return beer.alcohol == 0;
-    }else if(values.alcohol == '1'){
-      return beer.alcohol >= 1 && beer.alcohol <= 5
-    }else if(values.alcohol == '2'){
-      return beer.alcohol >= 5 && beer.alcohol <= 7
-    }else if(values.alcohol == '3'){
-      return beer.alcohol >= 7 && beer.alcohol <= 9
-    }else if(values.alcohol == '4'){
-      return beer.alcohol >= 9
-    }else {
-      return;
-    }
-    })
+  //   if(values.alcohol == '0'){
+  //     return beer.alcohol == 0;
+  //   }else if(values.alcohol == '1'){
+  //     return beer.alcohol >= 1 && beer.alcohol <= 5
+  //   }else if(values.alcohol == '2'){
+  //     return beer.alcohol >= 5 && beer.alcohol <= 7
+  //   }else if(values.alcohol == '3'){
+  //     return beer.alcohol >= 7 && beer.alcohol <= 9
+  //   }else if(values.alcohol == '4'){
+  //     return beer.alcohol >= 9
+  //   }else {
+  //     return;
+  //   }
+  //   })
 
-    return toFilter;
+  //   return toFilter;
+  // }
+
+
+// OK -----------------------------
+  submitForm(){
+    this.beerService.runFilters(this.form.value)
+    this.route.navigateByUrl('tabs/recommend/recommend-card-deck')
+  }
+
+  clearForm() {
+    this.form.reset()
   }
 
 
-
+  // pickRandom(){
+  //   let randomNumber = Math.floor(Math.random() * (this.filteredBeers.length))
+  //   this.randomBeer = this.filteredBeers[randomNumber]
+  // }
 
 
 }

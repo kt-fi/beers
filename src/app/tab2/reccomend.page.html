@@ -18,9 +18,6 @@
     </ion-row>
     <ion-row>
       <ion-col size-sm="12">
-        <ion-button *ngIf="filteredBeers.length > 0" color="dark" expand="block" (click)="resetChoices()">
-          Try Again!
-        </ion-button>
         <form action="" [formGroup]="form" *ngIf="filteredBeers.length < 1">
           <ion-item>
             <ion-select formControlName="style" label="Style" placeholder="Style" interface="popover" >
@@ -66,7 +63,7 @@
 
 
 
-  <ion-grid>
+  <!-- <ion-grid>
     <ion-row>
       <ion-col size-sm="8" offset-sm="2">
         <swiper-container effect="cards" *ngIf="filteredBeers" [options]="slideConfig" >
@@ -94,7 +91,7 @@
 
           </ion-col>
     </ion-row>
-  </ion-grid>
+  </ion-grid> -->
 
   <!-- <ion-button expand="block"  (click)="pickRandom()" class="ion-text-center ion-padding" color="dark">
       Random Beer

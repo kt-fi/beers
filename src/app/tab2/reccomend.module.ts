@@ -1,5 +1,5 @@
 import { IonicModule } from '@ionic/angular';
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ReccomendPage } from './reccomend.page';
@@ -18,6 +18,6 @@ import { MaxWordsPipe } from '../max-words.pipe';
     ReactiveFormsModule
   ],
   declarations: [ReccomendPage, MaxWordsPipe],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+
 })
 export class Tab2PageModule {}

@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Beer } from './beer';
-import { BehaviorSubject, Subject, map, take, tap } from 'rxjs';
+import { BehaviorSubject, Subject, delay, map, take, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BeersService {
 
-  private selectedBeers = new Subject<Beer[]>()
+  public selectedBeers = new Subject<Beer[]>()
 
   private _beers = new BehaviorSubject<Beer[]>([
     new Beer('b1', 'Achel', 'belga', 'Strong Blonde', 'Belgium', 7.0, "https://brewhouse.es/wp-content/uploads/2021/01/ACHE101.3.jpg", "Cerveza auténtica de abadía trapensede alta fermentación que vuelve a fermentar en la botella, la fermentación principal con una levadura suministrada por la fábrica de cerveza Van Steenberghe",['Dulce', 'Suave']),
@@ -34,6 +34,63 @@ export class BeersService {
         return beer.beerId === beerId
       })}
     }))
+  }
+
+
+  runFilters(values:any){
+
+      return this.beers.pipe(take(1), delay(2000), map(beers=>{
+        let toFilter = [...beers]
+
+    toFilter = toFilter.filter(beer => {
+      if(values.style === 'any' || values.style === null){
+        return toFilter;
+      }
+      return beer.style === values.style;
+    })
+    toFilter = toFilter.filter(beer => {
+      if(values.country === 'any' || values.country === null){
+        return toFilter;
+      }
+      return beer.country === values.country;
+
+    })
+    toFilter = toFilter.filter(beer => {
+      if(values.flavour === 'any' || values.flavour === null){
+        return toFilter;
+      }
+    return beer.notes.find((notes:any) => notes === values.flavour)
+    })
+
+    toFilter = toFilter.filter(beer => {
+      if(values.alcohol === 'any' || values.alcohol === null){
+        return toFilter;
+      }
+
+    if(values.alcohol == '0'){
+      return beer.alcohol == 0;
+    }else if(values.alcohol == '1'){
+      return beer.alcohol >= 1 && beer.alcohol <= 5
+    }else if(values.alcohol == '2'){
+      return beer.alcohol >= 5 && beer.alcohol <= 7
+    }else if(values.alcohol == '3'){
+      return beer.alcohol >= 7 && beer.alcohol <= 9
+    }else if(values.alcohol == '4'){
+      return beer.alcohol >= 9
+    }else {
+      return;
+    }
+    })
+
+    return toFilter;
+      })).subscribe(filteredBeers => {
+        console.log(filteredBeers)
+        this.selectedBeers.next(filteredBeers)
+      })
+
+
+
+
   }
 
   }
