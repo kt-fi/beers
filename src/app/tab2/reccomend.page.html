@@ -23,13 +23,13 @@
         </ion-button>
         <form action="" [formGroup]="form" *ngIf="filteredBeers.length < 1">
           <ion-item>
-            <ion-select formControlName="style" label="Style" placeholder="Style">
+            <ion-select formControlName="style" label="Style" placeholder="Style" interface="popover" >
               <ion-select-option value="any">Any</ion-select-option>
               <ion-select-option *ngFor="let style of filterItems.styles" value="{{style}}">{{style}}</ion-select-option>
             </ion-select>
           </ion-item>
           <ion-item>
-            <ion-select  formControlName="alcohol"  label="Alcohol" placeholder="Alcohol">
+            <ion-select  formControlName="alcohol"  label="Alcohol" placeholder="Alcohol"  interface="popover" >
               <ion-select-option value="any">Any</ion-select-option>
               <ion-select-option value="0">0</ion-select-option>
               <ion-select-option value="1">1-5</ion-select-option>
@@ -39,13 +39,13 @@
             </ion-select>
           </ion-item>
           <ion-item>
-            <ion-select  formControlName="country" label="Country" placeholder="Country">
+            <ion-select  formControlName="country" label="Country" placeholder="Country" interface="popover" >
               <ion-select-option value="any">Any</ion-select-option>
               <ion-select-option *ngFor="let country of filterItems.countries" value="{{country}}">{{country}}</ion-select-option>
             </ion-select>
           </ion-item>
           <ion-item>
-            <ion-select  formControlName="flavour"  label="Flavour" placeholder="Flavour">
+            <ion-select  formControlName="flavour"  label="Flavour" placeholder="Flavour"  interface="popover" >
               <ion-select-option value="any">Any</ion-select-option>
               <ion-select-option *ngFor="let flavour of filterItems.flavours" value="{{flavour}}">{{flavour}}</ion-select-option>
             </ion-select>
