@@ -38,51 +38,50 @@ export class BeersService {
 
 
   runFilters(values:any){
-
       return this.beers.pipe(take(1), delay(2000), map(beers=>{
         let toFilter = [...beers]
 
-    toFilter = toFilter.filter(beer => {
-      if(values.style === 'any' || values.style === null){
-        return toFilter;
-      }
-      return beer.style === values.style;
-    })
-    toFilter = toFilter.filter(beer => {
-      if(values.country === 'any' || values.country === null){
-        return toFilter;
-      }
-      return beer.country === values.country;
+        toFilter = toFilter.filter(beer => {
+          if(values.style === 'any' || values.style === null){
+            return toFilter;
+          }
+          return beer.style === values.style;
+        })
+        toFilter = toFilter.filter(beer => {
+          if(values.country === 'any' || values.country === null){
+            return toFilter;
+          }
+          return beer.country === values.country;
 
-    })
-    toFilter = toFilter.filter(beer => {
-      if(values.flavour === 'any' || values.flavour === null){
+        })
+        toFilter = toFilter.filter(beer => {
+          if(values.flavour === 'any' || values.flavour === null){
+            return toFilter;
+          }
+        return beer.notes.find((notes:any) => notes === values.flavour)
+        })
+
+        toFilter = toFilter.filter(beer => {
+          if(values.alcohol === 'any' || values.alcohol === null){
+            return toFilter;
+          }
+
+        if(values.alcohol == '0'){
+          return beer.alcohol == 0;
+        }else if(values.alcohol == '1'){
+          return beer.alcohol >= 1 && beer.alcohol <= 5
+        }else if(values.alcohol == '2'){
+          return beer.alcohol >= 5 && beer.alcohol <= 7
+        }else if(values.alcohol == '3'){
+          return beer.alcohol >= 7 && beer.alcohol <= 9
+        }else if(values.alcohol == '4'){
+          return beer.alcohol >= 9
+        }else {
+          return;
+        }
+        })
+
         return toFilter;
-      }
-    return beer.notes.find((notes:any) => notes === values.flavour)
-    })
-
-    toFilter = toFilter.filter(beer => {
-      if(values.alcohol === 'any' || values.alcohol === null){
-        return toFilter;
-      }
-
-    if(values.alcohol == '0'){
-      return beer.alcohol == 0;
-    }else if(values.alcohol == '1'){
-      return beer.alcohol >= 1 && beer.alcohol <= 5
-    }else if(values.alcohol == '2'){
-      return beer.alcohol >= 5 && beer.alcohol <= 7
-    }else if(values.alcohol == '3'){
-      return beer.alcohol >= 7 && beer.alcohol <= 9
-    }else if(values.alcohol == '4'){
-      return beer.alcohol >= 9
-    }else {
-      return;
-    }
-    })
-
-    return toFilter;
       })).subscribe(filteredBeers => {
         console.log(filteredBeers)
         this.selectedBeers.next(filteredBeers)
