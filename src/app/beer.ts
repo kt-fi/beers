@@ -7,6 +7,7 @@ export class Beer {
         public country: string,
         public alcohol: number,
         public imageUrl: string,
+        public color: string,
         public description: string,
         public notes: string[]
     ){}

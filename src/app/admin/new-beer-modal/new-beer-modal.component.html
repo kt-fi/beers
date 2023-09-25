@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-toolbar color="warning">
+    <ion-buttons slot="start">
+      <ion-button color="medium" (click)="cancel()">Cancel</ion-button>
+    </ion-buttons>
+    <ion-title>{{ beerId ? "Editar" : "Nueva"}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="confirm()" [strong]="true" [disabled]="!newBeerForm.valid">Confirm</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" color="warning">
+  <ion-grid>
+    <ion-row>
+      <ion-col size-sm="12">
+        <form [formGroup]="newBeerForm" action="">
+          <ion-list>
+            <ion-item>
+              <ion-input formControlName="name" color="dark" label="Nombre Cerveza" labelPlacement="stacked"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input formControlName="category" color="dark" label="Categoria" labelPlacement="stacked"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input formControlName="style" color="dark" label="Estilo" labelPlacement="stacked"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input formControlName="country" color="dark" label="Pais" labelPlacement="stacked"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input formControlName="alcohol" color="dark" label="Alcohol" labelPlacement="stacked"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input formControlName="imageUrl" color="dark" label="Imagen (URL)" labelPlacement="stacked"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input formControlName="color" color="dark" label="Color" labelPlacement="stacked"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-textarea rows="6" formControlName="description" color="dark" label="Descripcion" labelPlacement="stacked"></ion-textarea>
+            </ion-item>
+            <ion-item>
+              <ion-input formControlName="notes" color="dark" label="Sabores" labelPlacement="stacked"></ion-input>
+            </ion-item>
+          </ion-list>
+        </form>
+        <ion-row>
+          <ion-col size-sm="6"><ion-button expand="block" color="dark">Submit</ion-button></ion-col>
+          <ion-col size-sm="6"><ion-button expand="block" color="dark" fill="outline">Clear</ion-button></ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

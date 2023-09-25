@@ -1,0 +1,43 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="warning">
+    <ion-title>App Admin</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="onCreateBeer()">
+        <ion-icon name="add"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" color="warning">
+    <ion-grid>
+      <ion-row>
+        <ion-col size-sm="12">
+          <ion-list class="no-lines" *ngFor="let beer of loadedBeers" color="warning">
+            <ion-item-sliding #beerItem>
+                <ion-item>
+                  <ion-thumbnail>
+                    <ion-img [src]="beer.imageUrl"></ion-img>
+                  </ion-thumbnail>
+                  <ion-label>
+                    <h2>{{beer.name}}</h2>
+                  <p>{{beer.style}} / {{beer.alcohol}}º</p>
+                </ion-label>
+              </ion-item>
+
+              <ion-item-options>
+                <ion-item-option color="success" (click)="onEditBeer(beer.beerId, beerItem)">
+                  <ion-icon name="create"></ion-icon>
+                </ion-item-option>
+                <ion-item-option color="danger" (click)="onDeleteBeer(beer.beerId, beerItem)">
+                  <ion-icon name="trash"></ion-icon>
+                </ion-item-option>
+              </ion-item-options>
+
+            </ion-item-sliding>
+
+          </ion-list>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+</ion-content>
