@@ -12,6 +12,7 @@
   <ion-grid>
     <ion-row>
       <ion-col size-sm="12" size-md="6" offset-md="3">
+        <ion-spinner *ngIf="!selectedBeer" name="circles" class="ion-padding center-item"></ion-spinner>
         <ion-card>
           <div class="ion-text-center">
             <img class="ion-padding  beer__card--image-size" [src]="selectedBeer.imageUrl" alt="{{selectedBeer.name}}">

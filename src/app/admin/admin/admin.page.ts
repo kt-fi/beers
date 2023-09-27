@@ -79,4 +79,9 @@ export class AdminPage implements OnInit {
     beerItem.close()
   }
 
+  handleRefresh(event:any){
+    this.beerService.getBeers()
+    event.target.complete()
+  }
+
 }
