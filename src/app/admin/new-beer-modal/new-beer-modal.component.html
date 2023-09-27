@@ -13,14 +13,27 @@
 <ion-content [fullscreen]="true" color="warning">
   <ion-grid>
     <ion-row>
+
+    </ion-row>
+    <ion-row>
       <ion-col size-sm="12">
         <form [formGroup]="newBeerForm" action="">
-          <ion-list>
+      <ion-col size-sm="12">
+        <ion-img [src]="imageUrl"></ion-img>
+      </ion-col>
+          <ion-list no-lines>
             <ion-item>
               <ion-input formControlName="name" color="dark" label="Nombre Cerveza" labelPlacement="stacked"></ion-input>
             </ion-item>
             <ion-item>
-              <ion-input formControlName="category" color="dark" label="Categoria" labelPlacement="stacked"></ion-input>
+              <ion-select formControlName="category" label="Categoria" labelPlacement="stacked"  interface="popover">
+                <ion-select-option value="belga">Belga</ion-select-option>
+                <ion-select-option value="alemana">Alemana</ion-select-option>
+                <ion-select-option value="mundo">World Beer</ion-select-option>
+                <ion-select-option value="sin">Sin Alc / Gluten</ion-select-option>
+                <ion-select-option value="afruitada">Afrutada</ion-select-option>
+                <ion-select-option value="artesanal">Artesanal</ion-select-option>
+              </ion-select>
             </ion-item>
             <ion-item>
               <ion-input formControlName="style" color="dark" label="Estilo" labelPlacement="stacked"></ion-input>
@@ -29,25 +42,44 @@
               <ion-input formControlName="country" color="dark" label="Pais" labelPlacement="stacked"></ion-input>
             </ion-item>
             <ion-item>
-              <ion-input formControlName="alcohol" color="dark" label="Alcohol" labelPlacement="stacked"></ion-input>
+              <ion-input type="number" formControlName="alcohol" color="dark" label="Alcohol" labelPlacement="stacked"></ion-input>
             </ion-item>
             <ion-item>
-              <ion-input formControlName="imageUrl" color="dark" label="Imagen (URL)" labelPlacement="stacked"></ion-input>
+              <ion-input  formControlName="imageUrl" color="dark" label="Imagen (URL)" labelPlacement="stacked" [(ngModel)]="imageUrl"></ion-input>
+              <ion-button>Add<ion-icon name="add"></ion-icon></ion-button>
             </ion-item>
             <ion-item>
-              <ion-input formControlName="color" color="dark" label="Color" labelPlacement="stacked"></ion-input>
+              <ion-select formControlName="color" label="Color" labelPlacement="stacked"  interface="popover">
+                <ion-select-option value="Blonde">Blonde / Rubia</ion-select-option>
+                <ion-select-option value="Ambar">Ambar</ion-select-option>
+                <ion-select-option value="Negra">Negra</ion-select-option>
+                <ion-select-option value="Turbia">Turbia</ion-select-option>
+                <ion-select-option value="Blanca">Blanca</ion-select-option>
+                <ion-select-option value="Marron">Marron</ion-select-option>
+              </ion-select>
             </ion-item>
             <ion-item>
               <ion-textarea rows="6" formControlName="description" color="dark" label="Descripcion" labelPlacement="stacked"></ion-textarea>
             </ion-item>
             <ion-item>
-              <ion-input formControlName="notes" color="dark" label="Sabores" labelPlacement="stacked"></ion-input>
+              <ion-input #newNote formArrayName="notes" color="dark" label="Sabores" labelPlacement="stacked"></ion-input>
+              <ion-button (click)="addNote(newNote)">Add<ion-icon name="add"></ion-icon></ion-button>
+            </ion-item>
+            <ion-item *ngFor="let item of newBeerForm.value.notes; let i = index">
+                {{item.value}}
+                <ion-buttons slot="end">
+                  <ion-button color="danger" fill="outline" (click)="removeNote(i)">Remove</ion-button>
+                </ion-buttons>
             </ion-item>
           </ion-list>
         </form>
         <ion-row>
-          <ion-col size-sm="6"><ion-button expand="block" color="dark">Submit</ion-button></ion-col>
-          <ion-col size-sm="6"><ion-button expand="block" color="dark" fill="outline">Clear</ion-button></ion-col>
+          <ion-col size-sm="6">
+            <!-- <ion-button expand="block" color="dark">Submit</ion-button> -->
+          </ion-col>
+          <ion-col size-sm="6">
+            <ion-button expand="block" color="dark" fill="outline">Clear</ion-button>
+          </ion-col>
         </ion-row>
       </ion-col>
     </ion-row>

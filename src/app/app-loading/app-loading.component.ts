@@ -14,4 +14,7 @@ export class AppLoadingComponent  implements OnInit {
   }
 
 
+  adminRoute(){
+    this.router.navigateByUrl('admin')
+  }
 }

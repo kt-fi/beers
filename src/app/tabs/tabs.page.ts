@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BeersService } from '../beers.service';
 
 @Component({
   selector: 'app-tabs',
@@ -9,12 +10,18 @@ export class TabsPage implements OnInit{
 
   loading: boolean = true;
 
-  constructor() {}
+  constructor(private beerService: BeersService ) {}
 
-ngOnInit(): void {
-    setTimeout(()=>{
-      this.loading = false;
-    },500)
-}
+
+  ngOnInit(){
+      this.beerService.getBeers();
+      this.beerService.beers.subscribe(data => {
+        if(data){
+          setTimeout(()=>{
+            this.loading = false;
+          },3000)
+        }
+      })
+  }
 
 }

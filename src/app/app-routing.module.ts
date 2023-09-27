@@ -13,10 +13,12 @@ const routes: Routes = [
   {
     path: 'beer-card',
     loadChildren: () => import('./beers/beer-card/beer-card.module').then( m => m.BeerCardPageModule)
-  },  {
+  },
+  {
     path: 'admin',
     loadChildren: () => import('./admin/admin/admin.module').then( m => m.AdminPageModule)
-  }
+  },
+
 
 
 

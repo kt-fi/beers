@@ -10,6 +10,11 @@
   animation-iteration-count: infinite;
 }
 
+.bottom {
+  position: absolute;
+  left:0;
+  bottom: 0;
+}
 
 @keyframes logo-animation {
   0%{
