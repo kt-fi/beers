@@ -5,6 +5,8 @@ import { Subscription } from 'rxjs';
 import { Beer } from 'src/app/beer';
 import { BeersService } from 'src/app/beers.service';
 
+import { Camera, CameraPluginPermissions, CameraResultType } from '@capacitor/camera'
+
 @Component({
   selector: 'app-new-beer-modal',
   templateUrl: './new-beer-modal.component.html',
@@ -12,7 +14,7 @@ import { BeersService } from 'src/app/beers.service';
 })
 export class NewBeerModalComponent  implements OnInit, OnDestroy {
 
-  imageUrl?: string;
+  imageUrl?: any;
 
   newBeerForm!: FormGroup;
   beerId?: string;
@@ -52,7 +54,7 @@ export class NewBeerModalComponent  implements OnInit, OnDestroy {
         style: new FormControl(this.selectedBeer ? this.selectedBeer.style : null, [Validators.required]),
         country: new FormControl(this.selectedBeer ? this.selectedBeer.country : null, [Validators.required]),
         alcohol: new FormControl(this.selectedBeer ? this.selectedBeer.alcohol : null, [Validators.required]),
-        imageUrl: new FormControl(this.selectedBeer ? this.selectedBeer.imageUrl : null, [Validators.required]),
+        imageUrl: new FormControl(this.selectedBeer ? this.selectedBeer.imageUrl : null),
         color: new FormControl(this.selectedBeer ? this.selectedBeer.color : null, [Validators.required]),
         description: new FormControl(this.selectedBeer ? this.selectedBeer.description : null, [Validators.required]),
         notes: new FormArray([]),
@@ -99,7 +101,7 @@ export class NewBeerModalComponent  implements OnInit, OnDestroy {
        this.newBeerForm.value.style,
        this.newBeerForm.value.country,
        this.newBeerForm.value.alcohol,
-       this.newBeerForm.value.imageUrl,
+       this.imageUrl,
        this.newBeerForm.value.color,
        this.newBeerForm.value.description,
       notes )
@@ -116,7 +118,7 @@ export class NewBeerModalComponent  implements OnInit, OnDestroy {
           }).then(loader => {
             loader.present()
             if(!this.editMode){
-              this.beerService.createBeer(newBeer)
+              this.beerService.createBeer(newBeer).subscribe()
             }else{
               this.beerService.editBeer(this.beerId!, newBeer)
             }
@@ -132,6 +134,22 @@ export class NewBeerModalComponent  implements OnInit, OnDestroy {
       alert.present()
     })
 
+  }
+
+
+  addPhoto(){
+
+  Camera.getPhoto({
+      resultType: CameraResultType.DataUrl,
+      quality: 40,
+      allowEditing: false,
+    }).then((image)=>{
+     let imageUrl = image.dataUrl;
+
+    this.imageUrl = imageUrl;
+  }).catch((error)=>{
+    return;
+  })
   }
 
   ngOnDestroy(): void {

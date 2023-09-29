@@ -21,6 +21,7 @@
       <ion-col size-sm="12">
         <ion-img [src]="imageUrl"></ion-img>
       </ion-col>
+      <!-- <ion-spinner *ngIf="beers.length <= 0" name="circles" class="ion-padding center-item"></ion-spinner> -->
           <ion-list no-lines>
             <ion-item>
               <ion-input formControlName="name" color="dark" label="Nombre Cerveza" labelPlacement="stacked"></ion-input>
@@ -46,7 +47,8 @@
             </ion-item>
             <ion-item>
               <ion-input  formControlName="imageUrl" color="dark" label="Imagen (URL)" labelPlacement="stacked" [(ngModel)]="imageUrl"></ion-input>
-              <ion-button>Add<ion-icon name="add"></ion-icon></ion-button>
+              <p>Add Photo</p>
+              <ion-button (click)="addPhoto()">Add<ion-icon name="add"></ion-icon></ion-button>
             </ion-item>
             <ion-item>
               <ion-select formControlName="color" label="Color" labelPlacement="stacked"  interface="popover">

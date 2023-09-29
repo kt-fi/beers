@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  url: "https://beer-back.onrender.com/beer"
+  url: "http://localhost:3001/beer"
 };
 
 /*

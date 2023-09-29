@@ -13,6 +13,7 @@
   <ion-grid>
     <ion-row>
       <ion-col size-sm="8" offset-sm="2">
+        <ion-spinner *ngIf="filteredBeers.length <= 0" name="circles" class="ion-padding center-item"></ion-spinner>
         <swiper-container effect="cards" *ngIf="filteredBeers" [options]="slideConfig" >
           <swiper-slide *ngFor="let beer of filteredBeers">
             <ion-card >

@@ -4,6 +4,7 @@ import { Beer } from 'src/app/beer';
 import { BeersService } from 'src/app/beers.service';
 import { NewBeerModalComponent } from '../new-beer-modal/new-beer-modal.component';
 
+
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.page.html',
@@ -11,7 +12,7 @@ import { NewBeerModalComponent } from '../new-beer-modal/new-beer-modal.componen
 })
 export class AdminPage implements OnInit {
 
-  loadedBeers!: Beer[]
+  loadedBeers: Beer[] = []
 
   constructor(
     private beerService: BeersService,

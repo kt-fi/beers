@@ -12,7 +12,7 @@
     <ion-grid>
       <ion-row>
         <ion-col size-sm="12" size-md="6" offset-md="3">
-          <ion-spinner *ngIf="!beers" name="circles" class="ion-padding center-item"></ion-spinner>
+          <ion-spinner *ngIf="beers.length <= 0" name="circles" class="ion-padding center-item"></ion-spinner>
           <ion-list class="no-lines" *ngFor="let beer of beers" color="warning">
              <ion-item  detail [routerLink]="[beer.beerId ]">
               <ion-thumbnail>

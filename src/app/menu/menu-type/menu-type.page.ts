@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { map } from 'rxjs';
+import { delay, map } from 'rxjs';
 import { Beer } from 'src/app/beer';
 import { BeersService } from 'src/app/beers.service';
 
@@ -12,7 +12,7 @@ import { BeersService } from 'src/app/beers.service';
 export class MenuTypePage implements OnInit {
 
   beerType!: string;
-  beers!: Beer[] | any;
+  beers: Beer[] = [];
 
   constructor(
     private beersService: BeersService,
